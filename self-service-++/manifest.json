@@ -1,0 +1,19 @@
+{
+    "manifest_version": 3,
+    "name": "Self Service ++",
+    "version": "1.0.0",
+    "description": "Self Service ++",
+    "content_scripts": [
+        {
+            "matches": [
+                "https://banner.apps.uillinois.edu/*"
+            ],
+            "js": [
+                "content.js"
+            ]
+        }
+    ],
+    "permissions": [
+        "activeTab"
+    ]
+}
