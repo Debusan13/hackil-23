@@ -1,26 +1,38 @@
 // when hovering on <td class="footable-first-column">
 // add hovering red box on the mouse
 
-// wait for the page to load then get the <td> element
+// use MutationObserver to observe #tabs-classSearch
+// then add event listener for all <td class="footable-first-column">
+// when mouseover, add a red box
+// when mouseout, remove the red box
 
-window.addEventListener("load", function() {
-    let td = document.querySelector("td.footable-first-column");
-    
-    td.addEventListener("mouseover", function(event) {
-        let div = document.createElement("div-test");
-        div.style.position = "absolute";
-        div.style.top = event.clientY + "px";
-        div.style.left = event.clientX + "px";
-        div.style.width = "100px";
-        div.style.height = "100px";
-        div.style.backgroundColor = "red";
-        document.body.appendChild(div);
-    });
-
-    td.addEventListener("mouseout", function(event) {
-        let div = document.querySelector("div-test");
-        document.body.removeChild(div);
+let observer = new MutationObserver(function() {
+    let td = document.querySelectorAll("td.footable-first-column");
+    td.forEach(function(td) {
+        td.addEventListener("mouseover", function() {
+            let div = document.createElement("div-test");
+            // create a 100px * 100px red box
+            div.style.width = "100px";
+            div.style.height = "100px";
+            div.style.backgroundColor = "red";
+            div.style.position = "absolute";
+            div.style.top = "0px";
+            div.style.left = "0px";
+            td.appendChild(div);
+        });
+        td.addEventListener("mouseout", function() {
+            let div = td.querySelector("div-test");
+            td.removeChild(div);
+        });
     });
 });
+
+// observe the table inside the <div id="tabs-classSearch">
+// whenever the table is loaded, the observer will be triggered
+observer.observe(document.querySelector("div#tabs-classSearch"), {
+    childList: true,
+    subtree: true
+});
+
 
 
