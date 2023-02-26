@@ -30,30 +30,39 @@ app.get('/subjects/:subjectName', async (req, res) => {
         }
         x[i]["Total Students"] = num_enrolled;
         // finding average GPA of class 
-        var half_students = num_enrolled / 2
+
+        // var half_students = num_enrolled / 2
         var avg_gpa = 0
+        
+        // (x[i][Object.keys(all_grades)[1]] / num_enrolled) * all_grades[Object.keys(all_grades)[1]]
         for (var j = 0; j < 13; j++) {
             var letter_grade = Object.keys(all_grades)[j]
-            half_students -= parseInt(x[i][letter_grade])
-            if (half_students <= 0) {
-                avg_gpa = all_grades[letter_grade] 
-                break
-            }
+            var grade_to_add = (x[i][letter_grade] / num_enrolled) * all_grades[Object.keys(all_grades)[j]]
+            avg_gpa += grade_to_add
+            // half_students -= parseInt(x[i][letter_grade])
+            // if (half_students <= 0) {
+            //     avg_gpa = all_grades[letter_grade] 
+            //     break
+            // }
         }
-        x[i]["Average GPA"] = avg_gpa;
+        x[i]["Average GPA"] = avg_gpa.toFixed(2);
         
         var num_students
         // declaring new aggregate letter grades as 0 
-        x[i]["Total A"] = 0
-        x[i]["Total B"] = 0
-        x[i]["Total C"] = 0
-        x[i]["Total D"] = 0
-        x[i]["Total F"] = 0
+        x[i]["% A"] = 0
+        x[i]["% B"] = 0
+        x[i]["% C"] = 0
+        x[i]["% D"] = 0
+        x[i]["% F"] = 0
         for (var j = 0; j < 13; j++) {
             var letter_grade = Object.keys(all_grades)[j]
-            x[i]["Total ".concat(Object.keys(all_grades)[j].charAt(0))] += parseInt(x[i][letter_grade]) // combines num of students to larger letter grade (drops sign)
+            x[i]["% ".concat(Object.keys(all_grades)[j].charAt(0))] += parseInt(x[i][letter_grade]) // combines num of students to larger letter grade (drops sign)
         }
-
+        x[i]["% A"] = ((x[i]["% A"] * 100 / num_enrolled).toFixed(0)).concat("%")
+        x[i]["% B"] = ((x[i]["% B"] * 100 / num_enrolled).toFixed(0)).concat("%")
+        x[i]["% C"] = ((x[i]["% C"] * 100 / num_enrolled).toFixed(0)).concat("%")
+        x[i]["% D"] = ((x[i]["% D"] * 100 / num_enrolled).toFixed(0)).concat("%")
+        x[i]["% F"] = ((x[i]["% F"] * 100 / num_enrolled).toFixed(0)).concat("%")
     }
     return res.send(x);
 });
@@ -72,30 +81,39 @@ app.get('/subjects/:subjectName/:courseNumber', async (req, res) => {
         }
         x[i]["Total Students"] = num_enrolled;
         // finding average GPA of class 
-        var half_students = num_enrolled / 2
+
+        // var half_students = num_enrolled / 2
         var avg_gpa = 0
+        
+        // (x[i][Object.keys(all_grades)[1]] / num_enrolled) * all_grades[Object.keys(all_grades)[1]]
         for (var j = 0; j < 13; j++) {
             var letter_grade = Object.keys(all_grades)[j]
-            half_students -= parseInt(x[i][letter_grade])
-            if (half_students <= 0) {
-                avg_gpa = all_grades[letter_grade] 
-                break
-            }
+            var grade_to_add = (x[i][letter_grade] / num_enrolled) * all_grades[Object.keys(all_grades)[j]]
+            avg_gpa += grade_to_add
+            // half_students -= parseInt(x[i][letter_grade])
+            // if (half_students <= 0) {
+            //     avg_gpa = all_grades[letter_grade] 
+            //     break
+            // }
         }
-        x[i]["Average GPA"] = avg_gpa;
+        x[i]["Average GPA"] = avg_gpa.toFixed(2);
         
         var num_students
         // declaring new aggregate letter grades as 0 
-        x[i]["Total A"] = 0
-        x[i]["Total B"] = 0
-        x[i]["Total C"] = 0
-        x[i]["Total D"] = 0
-        x[i]["Total F"] = 0
+        x[i]["% A"] = 0
+        x[i]["% B"] = 0
+        x[i]["% C"] = 0
+        x[i]["% D"] = 0
+        x[i]["% F"] = 0
         for (var j = 0; j < 13; j++) {
             var letter_grade = Object.keys(all_grades)[j]
-            x[i]["Total ".concat(Object.keys(all_grades)[j].charAt(0))] += parseInt(x[i][letter_grade]) // combines num of students to larger letter grade (drops sign)
+            x[i]["% ".concat(Object.keys(all_grades)[j].charAt(0))] += parseInt(x[i][letter_grade]) // combines num of students to larger letter grade (drops sign)
         }
-
+        x[i]["% A"] = ((x[i]["% A"] * 100 / num_enrolled).toFixed(0)).concat("%")
+        x[i]["% B"] = ((x[i]["% B"] * 100 / num_enrolled).toFixed(0)).concat("%")
+        x[i]["% C"] = ((x[i]["% C"] * 100 / num_enrolled).toFixed(0)).concat("%")
+        x[i]["% D"] = ((x[i]["% D"] * 100 / num_enrolled).toFixed(0)).concat("%")
+        x[i]["% F"] = ((x[i]["% F"] * 100 / num_enrolled).toFixed(0)).concat("%")
     }
     return res.send(x)
 });
@@ -116,29 +134,39 @@ app.get('/courses/:year/:term/:subjectName/:courseNumber', async (req, res) => {
         }
         x[i]["Total Students"] = num_enrolled;
         // finding average GPA of class 
-        var half_students = num_enrolled / 2
+
+        // var half_students = num_enrolled / 2
         var avg_gpa = 0
+        
+        // (x[i][Object.keys(all_grades)[1]] / num_enrolled) * all_grades[Object.keys(all_grades)[1]]
         for (var j = 0; j < 13; j++) {
             var letter_grade = Object.keys(all_grades)[j]
-            half_students -= parseInt(x[i][letter_grade])
-            if (half_students <= 0) {
-                avg_gpa = all_grades[letter_grade] 
-                break
-            }
+            var grade_to_add = (x[i][letter_grade] / num_enrolled) * all_grades[Object.keys(all_grades)[j]]
+            avg_gpa += grade_to_add
+            // half_students -= parseInt(x[i][letter_grade])
+            // if (half_students <= 0) {
+            //     avg_gpa = all_grades[letter_grade] 
+            //     break
+            // }
         }
-        x[i]["Average GPA"] = avg_gpa;
+        x[i]["Average GPA"] = avg_gpa.toFixed(2);
         
         var num_students
         // declaring new aggregate letter grades as 0 
-        x[i]["Total A"] = 0
-        x[i]["Total B"] = 0
-        x[i]["Total C"] = 0
-        x[i]["Total D"] = 0
-        x[i]["Total F"] = 0
+        x[i]["% A"] = 0
+        x[i]["% B"] = 0
+        x[i]["% C"] = 0
+        x[i]["% D"] = 0
+        x[i]["% F"] = 0
         for (var j = 0; j < 13; j++) {
             var letter_grade = Object.keys(all_grades)[j]
-            x[i]["Total ".concat(Object.keys(all_grades)[j].charAt(0))] += parseInt(x[i][letter_grade]) // combines num of students to larger letter grade (drops sign)
+            x[i]["% ".concat(Object.keys(all_grades)[j].charAt(0))] += parseInt(x[i][letter_grade]) // combines num of students to larger letter grade (drops sign)
         }
+        x[i]["% A"] = ((x[i]["% A"] * 100 / num_enrolled).toFixed(0)).concat("%")
+        x[i]["% B"] = ((x[i]["% B"] * 100 / num_enrolled).toFixed(0)).concat("%")
+        x[i]["% C"] = ((x[i]["% C"] * 100 / num_enrolled).toFixed(0)).concat("%")
+        x[i]["% D"] = ((x[i]["% D"] * 100 / num_enrolled).toFixed(0)).concat("%")
+        x[i]["% F"] = ((x[i]["% F"] * 100 / num_enrolled).toFixed(0)).concat("%")
     }
     return res.send(x);
 });
