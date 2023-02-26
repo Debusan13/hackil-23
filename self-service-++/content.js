@@ -10,7 +10,7 @@ const onMouseOver = (event) => {
             box.style.left = (event.clientX - rect.left) + "px";
             box.style.visibility = "visible";
     
-            table.appendChild(box);
+            event.target.appendChild(box);
         } else {
             let box = event.target.querySelector('.test-box');
             let table = document.querySelector("#tabs-classSearch");
@@ -25,7 +25,7 @@ const onMouseOver = (event) => {
 
 const onMouseOut = (event) => {
     if (event.target.classList.contains('footable-first-column')) {
-        box.style.visibility = "hidden";
+        event.target.querySelector('.test-box').style.visibility = "hidden";
     }
 }
 
