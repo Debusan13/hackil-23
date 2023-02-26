@@ -3,7 +3,7 @@
     height: "100px";
     background-color: "red";
     position: absolute;
-    visibility: hidden;
+    visibility: visible;
 }
 /* on mouse hovor show test-box*/
 .test-box:hover {
