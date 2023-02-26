@@ -1,0 +1,11 @@
+.test-box {
+    width: "100px";
+    height: "100px";
+    background-color: "red";
+    position: absolute;
+    visibility: hidden;
+}
+/* on mouse hovor show test-box*/
+.test-box:hover {
+    visibility: visible;
+}

@@ -1,38 +1,39 @@
-// when hovering on <td class="footable-first-column">
-// add hovering red box on the mouse
+const onMouseOver = (event) => {
+    if (event.target.classList.contains('footable-first-column')) {
+        // if the footable-first-column does not have a box child, create one
+        if (!event.target.querySelector('.test-box')) {
+            let box = document.createElement('test-box');
+            let table = document.querySelector("#tabs-classSearch");
+            let rect = table.getBoundingClientRect();
+    
+            box.style.top = (event.clientY - rect.top) + "px";
+            box.style.left = (event.clientX - rect.left) + "px";
+            box.style.visibility = "visible";
+    
+            table.appendChild(box);
+        } else {
+            let box = event.target.querySelector('.test-box');
+            let table = document.querySelector("#tabs-classSearch");
+            let rect = table.getBoundingClientRect();
+    
+            box.style.top = (event.clientY - rect.top) + "px";
+            box.style.left = (event.clientX - rect.left) + "px";
+            box.style.visibility = "visible";
+        }
+    }
+}
 
-// use MutationObserver to observe #tabs-classSearch
-// then add event listener for all <td class="footable-first-column">
-// when mouseover, add a red box
-// when mouseout, remove the red box
+const onMouseOut = (event) => {
+    if (event.target.classList.contains('footable-first-column')) {
+        box.style.visibility = "hidden";
+    }
+}
 
-let observer = new MutationObserver(function() {
-    let td = document.querySelectorAll("td.footable-first-column");
-    td.forEach(function(td) {
-        td.addEventListener("mouseover", function() {
-            let div = document.createElement("div-test");
-            // create a 100px * 100px red box
-            div.style.width = "100px";
-            div.style.height = "100px";
-            div.style.backgroundColor = "red";
-            div.style.position = "absolute";
-            div.style.top = "0px";
-            div.style.left = "0px";
-            td.appendChild(div);
-        });
-        td.addEventListener("mouseout", function() {
-            let div = td.querySelector("div-test");
-            td.removeChild(div);
-        });
-    });
+window.addEventListener("load", (event) => {
+    document.querySelector("#tabs-classSearch").addEventListener(
+        'mouseover', onMouseOver
+    );
+    document.querySelector("#tabs-classSearch").addEventListener(
+        'mouseout', onMouseOut
+    );
 });
-
-// observe the table inside the <div id="tabs-classSearch">
-// whenever the table is loaded, the observer will be triggered
-observer.observe(document.querySelector("div#tabs-classSearch"), {
-    childList: true,
-    subtree: true
-});
-
-
-
