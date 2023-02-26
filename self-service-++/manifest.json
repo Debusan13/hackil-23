@@ -1,22 +1,22 @@
 {
-    "manifest_version": 3,
-    "name": "Self Service ++",
-    "version": "1.0.0",
-    "description": "Self Service ++",
-    "content_scripts": [
-        {
-            "matches": [
-                "https://banner.apps.uillinois.edu/*"
-            ],
-            "js": [
-                "content.js"
-            ],
-            "css" : [
-                "style.css"
-            ]
-        }
-    ],
-    "permissions": [
-        "activeTab"
-    ]
+  "manifest_version": 3,
+  "name": "Self Service ++",
+  "version": "1.0.0",
+  "description": "Self Service ++",
+  "icons": {
+    "128": "images/icon.png"
+  },
+  "content_scripts": [
+    {
+      "js": ["scripts/content.js", "scripts/jquery-3.4.1.slim.min.js", "scripts/bootstrap.min.js", "scripts/popper.min.js"],
+      "css": ["styles/bootstrap.min.css"],
+      "matches": [
+        "https://banner.apps.uillinois.edu/*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "activeTab"
+  ]
 }
